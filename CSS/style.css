@@ -15,7 +15,7 @@ font-family: 'Poppins', sans-serif;
   body {
     background-color: rgb(29, 125, 170);
     width: 100%;
-    height: 100vh;
+    /*height: 100vh;*/
   }
 
   canvas {
@@ -40,6 +40,13 @@ font-family: 'Poppins', sans-serif;
     border: none;
     border-radius: 15px;
     box-shadow: 0px 0px 10px #61616199;
+    outline:none;
+    transition: background 1s;
+  }
+  .yuju:hover {
+    transition-property: background;
+    background: linear-gradient(rgba(214, 214, 214, 0.055), #94d2eb81);
+    box-shadow: 0px 0px 25px #46464699;
   }
 
   h2 {
@@ -47,6 +54,7 @@ font-family: 'Poppins', sans-serif;
     font-size: 30px;
     padding: 0 0 15px 0;
   }
+
   .scores {
     font-family: 'Inconsolata', monospace;
     padding: 20px 20px 20px 10px;

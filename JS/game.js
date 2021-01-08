@@ -201,23 +201,19 @@ class Game {
         this.ctx.restore()
 
         // Fats
-        this.ctx.save()
-        this.ctx.drawImage(
-            this.fats,
-            this.canvas.width - 1000 / 5.2 + 1,
-            -2,
-            1000/ 5.2,
-            166 / 5.2
-        )
-        this.ctx.restore()
+        // this.ctx.save()
+        // this.ctx.drawImage(
+        //     this.fats,
+        //     this.canvas.width - 1000 / 5.2 + 1,
+        //     -2,
+        //     1000/ 5.2,
+        //     166 / 5.2
+        // )
+        // this.ctx.restore()
     }
 
     getScore() {
         return `${this.points}`
-    }
-
-    getHI() {
-
     }
 
     move() {
@@ -338,27 +334,28 @@ class Game {
         this.green = false
         this.ink = false
         this.crown = false
-        //clearInterval(this.drawInterval)
         this.buttonRestart.style.visibility = "visible"
-        this.ctx.save()
-        this.ctx.fillStyle = 'rgba(194, 244, 255, 0.1)'
-        this.ctx.fillRect(this.canvas.width/2 - 150, this.canvas.height/2 - 120, 300, 250)
+        // clearInterval(this.drawInterval)
+        // 
+        // this.ctx.save()
+        // this.ctx.fillStyle = 'rgba(194, 244, 255, 0.1)'
+        // this.ctx.fillRect(this.canvas.width/2 - 150, this.canvas.height/2 - 120, 300, 250)
     
-        this.ctx.font = '20px Russo One'
-        this.ctx.fillStyle = 'Black'
-        this.ctx.textAlign = 'center'
-        this.ctx.fillText(
-          'Game over!',
-          this.canvas.width / 2,
-          this.canvas.height / 2 - 80,
-        )
-        this.ctx.font = '20px Russo One'
-        this.ctx.fillText(
-            `Final score ${this.points}`,
-            this.canvas.width / 2,
-            this.canvas.height / 2 + 50 -90,
-          )
-        this.ctx.restore()
+        // this.ctx.font = '20px Russo One'
+        // this.ctx.fillStyle = 'Black'
+        // this.ctx.textAlign = 'center'
+        // this.ctx.fillText(
+        //   'Game over!',
+        //   this.canvas.width / 2,
+        //   this.canvas.height / 2 - 80,
+        // )
+        // this.ctx.font = '20px Russo One'
+        // this.ctx.fillText(
+        //     `Final score ${this.points}`,
+        //     this.canvas.width / 2,
+        //     this.canvas.height / 2 + 50 -90,
+        //   )
+        // this.ctx.restore()
     }
 
     checkCollitions() {
