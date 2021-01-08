@@ -3,6 +3,8 @@ class Game {
         this.canvas = document.getElementById(canvasId)
         this.ctx = this.canvas.getContext('2d')
 
+        this.buttonRestart = document.getElementById("buttonRestart")
+
         this.canvas.width = 800
         this.canvas.height = 500
 
@@ -419,9 +421,11 @@ class Game {
             this.fish.toxicDead()
             this.green = true
             this.sound.toxicDead.play()
+            
             setTimeout(()=> { // METER ESTO SIEMPRE QUE SE MUERA DEL TODO
                 this.die()
                 this.completeDeath = true
+                this.buttonRestart.style.visibility = "visible"
             }, 5000)
         }
 
@@ -446,22 +450,22 @@ class Game {
     }
 
     checkObstaclesCollisions() {
-        // prey with slim
-        this.slim.forEach((sli) => {
+        // // prey with slim
+        // this.slim.forEach((sli) => {
             
-        })
-            if (this.prey.some((pre) => sli.collidesWith(pre))) {
-                this.prey = this.prey.filter((prey) => !this.prey.collidesWith(prey))
-                console.log('collision before screen')
-            }
+        // })
+        //     if (this.prey.some((pre) => sli.collidesWith(pre))) {
+        //         this.prey = this.prey.filter((prey) => !this.prey.collidesWith(prey))
+        //         console.log('collision before screen')
+        //     }
 
-        //slim with prey
-        this.prey.forEach((pre) => {
-            if (this.prey.some((pre) => sli.collidesWith(pre))) {
-                this.prey = this.prey.filter((prey) => !this.prey.collidesWith(prey))
-                console.log('collision before screen')
-            }
-        })
+        // //slim with prey
+        // this.prey.forEach((pre) => {
+        //     if (this.prey.some((pre) => sli.collidesWith(pre))) {
+        //         this.prey = this.prey.filter((prey) => !this.prey.collidesWith(prey))
+        //         console.log('collision before screen')
+        //     }
+        // })
         
     }
 }

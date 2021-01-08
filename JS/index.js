@@ -4,18 +4,6 @@ function removeItem(event) {
     target.parentNode.removeChild(target)
 }
 
-function setDeadButton() {
-    // creación del botón
-    const mySpace = document.getElementById("buttons")
-    const myRestart = document.createElement('button')
-
-    myRestart.innerHTML = 'Restart'
-    myRestart.setAttribute('class', 'yuju')
-    myRestart.setAttribute('id', 'restart')
-
-    mySpace.appendChild(myRestart)
-}
-
 function accScore() {
     const scores = document.getElementById("scores")
     const newScore = document.createElement('ol')
@@ -25,44 +13,34 @@ function accScore() {
     scores.appendChild(newScore)
 }
 
-function sendBack() {
-    const list = document.getElementById("swapper");
-    list.appendChild(list.firstElementChild)
+let playAgainBut = document.getElementById("buttonRestart")
+let unShow = (element) => element.style.visibility = "hidden"
+let hide = (element) => element.style.display = "none"
 
-    const but = document.getElementById('start')
-    but.innerHTML = 'Play again!'
-}
-
-function bringFront() {
-    const list = document.getElementById("swapper");
-    list.appendChild(list.firstElementChild)
-
-    const butt = document.getElementById('start')
-    butt.innerHTML = 'Play!'
-}
 
 window.addEventListener('load', () => {
+    unShow(playAgainBut)
     game.start()
     game.untilStart()
 
     const addBtn = document.getElementById('start')
-    addBtn.addEventListener('click', sendBack)
+    addBtn.addEventListener('click', removeItem)
     addBtn.onclick = () => {
         game.presStart() 
     }
 
-    if(false) {
-        console.log('yuju')
-        bringFront()
+    playAgainBut.addEventListener('click', ()=> {
+        accScore()
+        unShow(playAgainBut)
+        //location.reload()
+    })
         // const createBut = document.getElementById('restart')
         // createBut.addEventListener('click', () => {
         //     game.start()
         //     game.presStart()
         //     accScore()
         // })
-    }
     
-
     document.addEventListener('keydown', (event) => {
         game.onKeyEvent(event)
     })
