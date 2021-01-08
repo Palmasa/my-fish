@@ -4,18 +4,39 @@ function removeItem(event) {
     target.parentNode.removeChild(target)
 }
 
+let roundsCounter = 0
+
 function accScore() {
     const scores = document.getElementById("scores")
-    const newScore = document.createElement('ol')
-
-    newScore.innerHTML = game.getScore()
-
+    const newScore = document.createElement('p')
+    newScore.innerHTML = `${converterRounds()} round : ${game.getScore()} points`
     scores.appendChild(newScore)
+}
+
+function converterRounds() {
+    if (roundsCounter === 1) {
+        return "First"
+    } else if (roundsCounter === 2) {
+        return "Second"
+    } else if (roundsCounter === 3) {
+        return "Third"
+    } else if (roundsCounter === 4) {
+        return "Fourth"
+    } else if (roundsCounter === 5) {
+        return "Fith"
+    } else if (roundsCounter === 6) {
+        return "Sixth"
+    } else if (roundsCounter === 7) {
+        return "Seventh"
+    } else {
+        return roundsCounter
+    }
 }
 
 let playAgainBut = document.getElementById("buttonRestart")
 let unShow = (element) => element.style.visibility = "hidden"
 let hide = (element) => element.style.display = "none"
+
 
 
 window.addEventListener('load', () => {
@@ -26,20 +47,17 @@ window.addEventListener('load', () => {
     const addBtn = document.getElementById('start')
     addBtn.addEventListener('click', removeItem)
     addBtn.onclick = () => {
-        game.presStart() 
+        game.presStart()
     }
 
     playAgainBut.addEventListener('click', ()=> {
-        accScore()
+        roundsCounter = roundsCounter + 1
         unShow(playAgainBut)
+        accScore()
+        game.reSet()
+        game.presStart()
         //location.reload()
     })
-        // const createBut = document.getElementById('restart')
-        // createBut.addEventListener('click', () => {
-        //     game.start()
-        //     game.presStart()
-        //     accScore()
-        // })
     
     document.addEventListener('keydown', (event) => {
         game.onKeyEvent(event)

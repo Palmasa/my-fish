@@ -28,7 +28,6 @@ class Game {
         this.ink = false
         this.green = false
         this.crown = false
-        this.completeDeath = false
 
         this.background = new Background(this.ctx)
         this.prey = []
@@ -59,6 +58,35 @@ class Game {
             toxicDead: new Audio('../assets/death.mp3'),
 
         }
+    }
+
+    untilStart() {
+        this.fish.actionControl = false
+    }
+    
+    presStart() {
+        this.fish.actionControl = true
+        this.fish.vx = SPEED
+        this.backSound.theme.play() //=> MUSIC HERE!
+    }
+
+    reSet() {
+        this.clear()
+        this.draw()
+        this.points = 0
+        this.prey = []
+        this.slim = []
+        this.bubles = []
+        this.seaweeds = []
+        this.boat = []
+        this.octopus = []
+        this.toxics = []
+        this.fish = ''
+        this.fish = new Fish(this.ctx, 10, this.canvas.height / 2 - 50)
+    }
+
+    rePaint() {
+        
     }
 
     start() {
@@ -108,29 +136,6 @@ class Game {
                 }
             }, this.fps)
         }
-    }
-
-    untilStart() {
-        this.fish.actionControl = false
-    }
-    
-    presStart() {
-        this.fish.actionControl = true
-        this.fish.vx = SPEED
-        this.backSound.theme.play() //=> MUSIC HERE!
-    }
-
-    reSet() {
-        this.fish.actionControl = false
-        this.points = 0
-        this.prey = []
-        this.bubles = []
-        this.seaweeds = []
-        this.boat = []
-        this.octopus = []
-        this.toxics = []
-        this.fish = ''
-        this.fish = new Fish(this.ctx, 10, this.canvas.height / 2 - 50)
     }
 
     clear() {
@@ -192,7 +197,6 @@ class Game {
         this.ctx.font = 'bold 10px Arial'
         this.ctx.fillText(`SCORE`, 10, 15)
         this.ctx.font = 'bold 18px Arial'
-        
         this.ctx.fillText(`${this.points}`, 50, 15)
         this.ctx.restore()
 
@@ -206,6 +210,14 @@ class Game {
             166 / 5.2
         )
         this.ctx.restore()
+    }
+
+    getScore() {
+        return `${this.points}`
+    }
+
+    getHI() {
+
     }
 
     move() {
@@ -323,7 +335,11 @@ class Game {
     }
 
     die() {
-        clearInterval(this.drawInterval)
+        this.green = false
+        this.ink = false
+        this.crown = false
+        //clearInterval(this.drawInterval)
+        this.buttonRestart.style.visibility = "visible"
         this.ctx.save()
         this.ctx.fillStyle = 'rgba(194, 244, 255, 0.1)'
         this.ctx.fillRect(this.canvas.width/2 - 150, this.canvas.height/2 - 120, 300, 250)
@@ -343,10 +359,6 @@ class Game {
             this.canvas.height / 2 + 50 -90,
           )
         this.ctx.restore()
-    }
-
-    getScore() {
-        return `${this.points}`
     }
 
     checkCollitions() {
@@ -424,8 +436,6 @@ class Game {
             
             setTimeout(()=> { // METER ESTO SIEMPRE QUE SE MUERA DEL TODO
                 this.die()
-                this.completeDeath = true
-                this.buttonRestart.style.visibility = "visible"
             }, 5000)
         }
 

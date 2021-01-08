@@ -18,52 +18,6 @@ font-family: 'Poppins', sans-serif;
     height: 100vh;
   }
 
-/*   .container-HI {
-      display: flex;
-  }
-
-  .higher-score {
-    font-family: 'Bungee Outline', cursive;
-    width: 5%;
-    background-color: rgb(230, 247, 255);
-    margin: 20px 0 20px 20px;
-    box-shadow: 0px 0px 10px #61616199;
-    padding: 10px;
-    border-radius: 15px 0 0 15px;
-    transition: margin 1s;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  #hi {
-    font-family: 'Russo One', sans-serif;
-    font-size: 25px;
-    font-weight: 300;
-    margin: 0;
-    width: 5%;
-    background-color: rgb(230, 247, 255);
-    margin: 20px 20px 20px 0;
-    box-shadow: 0px 0px 10px #61616199;
-    padding: 10px;
-    border-radius: 0 15px 15px 0;
-    transition: margin 1s;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  h1 {
-      margin: 0;
-      font-size: 30px;
-  }
-
-  h2 {
-    font-family: 'Inconsolata', monospace;
-    font-weight: 300;
-  }
- */
- 
   canvas {
     position: absolute;
     left: 50%;
@@ -86,4 +40,18 @@ font-family: 'Poppins', sans-serif;
     border: none;
     border-radius: 15px;
     box-shadow: 0px 0px 10px #61616199;
-  } 
+  }
+
+  h2 {
+    font-family: 'Bungee Outline', cursive;
+    font-size: 30px;
+    padding: 0 0 15px 0;
+  }
+  .scores {
+    font-family: 'Inconsolata', monospace;
+    padding: 20px 20px 20px 10px;
+    line-height: 0.3;
+    background-color: rgba(123, 172, 196, 0.2);
+    width: 300px;
+    margin: 200px 20px 0 0;
+  }
