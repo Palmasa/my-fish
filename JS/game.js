@@ -132,7 +132,7 @@ class Game {
                     this.drawCountWeed = 0
                 }
                 if (this.drawCountBoat % DRAW_WEED_FRAMES === 0) {
-                    //this.addBoat()
+                    this.addBoat()
                     this.drawCountBoat = 0
                 }
             }, this.fps)
@@ -281,7 +281,7 @@ class Game {
         if (this.fish.x === this.fish.maxX) {
             const boa = new Boat(
               this.ctx,
-              this.canvas.width + 613 / 4,
+              Math.floor(Math.random() * (this.canvas.width * 2 - this.canvas.width + 78) + this.canvas.width + 78),
               -15
             )
             this.boat.push(boa)
@@ -469,13 +469,13 @@ class Game {
             this.ink = false
             this.crown = false
             this.protection = false
-            this.sound.toxicDead.play()
             this.fish.stopMotion = false
+            this.sound.toxicDead.play()
             this.fish.collitions = false
             this.startPoints = false
             setTimeout(()=> {
                 this.die()
-            }, 5000)
+            }, 4000)
         }
     }
 

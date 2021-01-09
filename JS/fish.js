@@ -496,15 +496,16 @@ class Fish {
         this.actionControl = false
         this.vy = 0
         this.y = this.y
-        this.sprite.horizontalFrameIndex = 1
-        this.sprite.verticalFrameIndex = 1
+
+        setInterval(()=> {
+            this.sprite.horizontalFrameIndex = 1
+            this.sprite.verticalFrameIndex = 1
+        })
         
         this.x = this.ctx.canvas.width / 2 - this.width - 1
         this.rectX = this.x + this.width * 0.25
 
         setTimeout(()=> {
-            this.sprite.horizontalFrameIndex = 1
-            this.sprite.verticalFrameIndex = 1
             this.vy += 1
             this.maxYfloor = this.ctx.canvas.height + this.rectHeight * 3
         }, 1500) 
@@ -512,23 +513,21 @@ class Fish {
     }
 
     rodDead() {
-        this.stopMotion = false
+        //this.stopMotion = false
         this.collitions = false
         this.actionControl = false
-        this.vy = 0
-        this.y = this.y
         this.sprite.horizontalFrameIndex = 1
         this.sprite.verticalFrameIndex = 1
-
-        
+        setInterval(()=> {
+            this.sprite.horizontalFrameIndex = 1
+            this.sprite.verticalFrameIndex = 1
+        })
         this.x = this.ctx.canvas.width / 2 - this.width - 1
         this.rectX = this.x + this.width * 0.25
 
         setTimeout(()=> {
-            this.sprite.horizontalFrameIndex = 1
-            this.sprite.verticalFrameIndex = 1
-            this.vy += - 2
-            this.maxYfloor = 60
+            this.vy += -1
+            this.maxYsurface = 22
         }, 1500) 
 
     }
