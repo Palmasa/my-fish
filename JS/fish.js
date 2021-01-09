@@ -399,10 +399,10 @@ class Fish {
     }
 
     fatDead() {
+        this.collitions = false
         this.stopMotion = false
         this.sprite.horizontalFrameIndex = 2
         this.sprite.verticalFrameIndex = 0
-        this.collitions = false
         this.actionControl = false
         this.vy = 0
         this.y = this.y

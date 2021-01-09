@@ -198,8 +198,6 @@ class Game {
         }
         // Points
         this.ctx.save()
-        // this.ctx.font = 'bold 10px Arial'
-        // this.ctx.fillText(`SCORE`, 10, 15)
         this.ctx.font = 'bold 18px Arial'
         this.ctx.fillText(`${this.points}`, 0, 15)
         this.ctx.restore()
@@ -328,27 +326,6 @@ class Game {
         this.protection = false
         this.buttonRestart.style.visibility = "visible"
         father.style.cursor = "auto"
-        // clearInterval(this.drawInterval)
-        // 
-        // this.ctx.save()
-        // this.ctx.fillStyle = 'rgba(194, 244, 255, 0.1)'
-        // this.ctx.fillRect(this.canvas.width/2 - 150, this.canvas.height/2 - 120, 300, 250)
-
-        // this.ctx.font = '20px Russo One'
-        // this.ctx.fillStyle = 'Black'
-        // this.ctx.textAlign = 'center'
-        // this.ctx.fillText(
-        //   'Game over!',
-        //   this.canvas.width / 2,
-        //   this.canvas.height / 2 - 80,
-        // )
-        // this.ctx.font = '20px Russo One'
-        // this.ctx.fillText(
-        //     `Final score ${this.points}`,
-        //     this.canvas.width / 2,
-        //     this.canvas.height / 2 + 50 -90,
-        //   )
-        // this.ctx.restore()
     }
 
     checkCollitions() {
@@ -386,7 +363,6 @@ class Game {
         // Slim Collition
         if (this.slim.some((sli) => this.fish.collidesWith(sli) && sli.x + sli.width*4 > this.ctx.canvas.width/2)) {
             if (this.collitionsCountPrey >=1) {
-                console.log('getting slimmer')
                 this.fish.slimmer()
                 this.sound.eat.play()
                 setTimeout(() => {
@@ -402,7 +378,6 @@ class Game {
 
         // Protection Buble collition
         if (this.bubles.some((buble) => this.fish.collidesWith(buble))) {
-            console.log('protection')
             this.fish.protected()
             this.protection = true
             this.ink = false
@@ -418,7 +393,6 @@ class Game {
 
          // Octopus ink collitions
          if (this.octopus.some((octopu) => this.fish.collidesWith(octopu))) {
-            console.log('octopusHIT')
             this.fish.slowOctopus()
             this.sound.octopusSplash.play()
             this.ink = true
@@ -432,7 +406,6 @@ class Game {
 
         // Toxic death collition
         if (this.toxics.some((toxic) => this.fish.collidesWith(toxic))) {
-            console.log('toxicHIT')
             this.fish.toxicDead()
             this.green = true
             this.sound.toxicDead.play()
@@ -449,7 +422,6 @@ class Game {
 
         // Seaweed dizzy collition
         if (this.seaweeds.some((weed) => this.fish.collidesWith(weed))) {
-            console.log('get dizzzy')
             this.crown = true
             this.fish.dizzy()
             this.sound.dizzyWeed.play()
@@ -461,7 +433,6 @@ class Game {
 
         // Boat dead collition
         if (this.boat.some((boa) => this.fish.collidesWith(boa))) {
-            console.log('rodHIT')
             this.fish.rodDead()
             this.green = false
             this.ink = false

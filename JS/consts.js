@@ -4,9 +4,9 @@ const KEY_DOWN = 40
 
 const MOVEMENT_FRAMES = 10
 
-const SPEED = 10
-const NEG_SPEED_swimmers = -12
-const NEG_SPEED_fixed = -10
+const SPEED = 8
+const NEG_SPEED_swimmers = -10
+const NEG_SPEED_fixed = -8
 
 function getRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)]
@@ -36,15 +36,19 @@ let dieciocho = 1080
 let diecinueve = 1140
 let veinte = 1200
 let veintiuno = 1260
-let veintidos = 1320 
+let veintidos = 1320
 
-let prey = [uno, dos, uno, uno, dos, cinco]
-let slim = [tres, cuatro, tres5, siete]
-let buble = [ocho, catorce, cinco, quince, trece, seis, veinte]
-let octopus = [quince, veintidos]
-let toxic = [siete, catorce, cinco]
-let weed = [veinte, seis, diez]
-let boat = [veintidos, diecisiete]
+
+
+let prey = [dos, uno, uno]
+let slim = [tres5, cuatro]
+let toxic = [ocho]
+let octopus = [nueve]
+let buble = [diez]
+let weed = [catorce]
+let boat = [diecisiete]
+
+
 
 const DRAW_PREY_FRAMES = getRandomElement(prey)
 const DRAW_SLIM_FRAMES = getRandomElement(slim)
