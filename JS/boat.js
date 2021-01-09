@@ -8,30 +8,40 @@ class Boat {
         this.y = y
         this.vy = 0
 
-        this.width = 613 / 4
-        this.height = 1167 / 4
+        this.width = 97 / 3
+        this.height = 709 / 3
 
+        this.boat = new Image ()
+        this.boat.src = '../assets/maRod.png'
+        this.boat.isReady = false
+        this.boat.onload = () => this.boat.isReady = true
 
-        this.rod = new Image ()
-        this.rod.src = '../assets/03.png'
-        this.rod.isReady = false
+        this.rod = new Image()
+        this.rod.src = '../assets/maBoat.png'
+        this.boat.isReady = false
         this.rod.onload = () => this.rod.isReady = true
     }
 
     isReady() {
-        return this.rod.isReady 
+        return this.boat.isReady && this.rod.isReady
     }
 
     draw() {
         if (this.isReady()) {
             this.ctx.drawImage(
-                this.rod,
+                this.boat,
                 this.x,
                 this.y,
                 this.width,
                 this.height
             )
-
+            this.ctx.drawImage(
+                this.rod,
+                this.x - 81,
+                this.y - 18,
+                249 / 3,
+                254 / 3
+            )
         }
     }
 

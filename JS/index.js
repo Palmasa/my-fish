@@ -9,7 +9,7 @@ let roundsCounter = 0
 function accScore() {
     const scores = document.getElementById("scores")
     const newScore = document.createElement('p')
-    newScore.innerHTML = `${converterRounds()} round : ${game.getScore()} points`
+    newScore.innerHTML = `${converterRounds()} round : ${game.getScore()} pts`
     scores.appendChild(newScore)
 }
 
@@ -28,6 +28,12 @@ function converterRounds() {
         return "Sixth"
     } else if (roundsCounter === 7) {
         return "Seventh"
+    } else if (roundsCounter === 8) {
+        return "Eight"
+    } else if (roundsCounter === 9) {
+        return "Ninth"
+    } else if (roundsCounter === 10) {
+        return "Tenth"
     } else {
         return roundsCounter
     }

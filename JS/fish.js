@@ -491,6 +491,7 @@ class Fish {
     }
 
     toxicDead() {
+        this.green = true
         this.stopMotion = false
         this.collitions = false
         this.actionControl = false

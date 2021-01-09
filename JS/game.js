@@ -59,7 +59,7 @@ class Game {
             octopusSplash: new Audio('../assets/splash.mp3'),
             dizzyWeed: new Audio('../assets/mareo.mp3'),
             toxicDead: new Audio('../assets/death.mp3'),
-
+            boatComming: new Audio('../assets/Music-boat.mp3')
         }
     }
 
@@ -105,22 +105,22 @@ class Game {
                 this.drawCountOctopus ++
                 this.drawCountToxic ++
                 this.drawCountWeed ++
-                //this.drawCountBoat ++
+                this.drawCountBoat ++
 
                 if (this.drawCountPrey % DRAW_PREY_FRAMES === 0) {
                     this.addPrey()
                     this.drawCountPrey = 0
                 }
                 if (this.drawCountSlim % DRAW_SLIM_FRAMES === 0) {
-                    //this.addSlim()
+                    this.addSlim()
                     this.drawCountSlim = 0
                 }
                 if (this.drawCountBuble % DRAW_BUBLE_FRAMES === 0) {
-                    //this.addBuble()
+                    this.addBuble()
                     this.drawCountBuble = 0
                 }
                 if (this.drawCountOctopus % DRAW_OCTOPUS_FRAMES === 0) {
-                    //this.addOctopus()
+                    this.addOctopus()
                     this.drawCountOctopus = 0
                 }
                 if (this.drawCountToxic % DRAW_TOXIC_FRAMES === 0) {
@@ -281,8 +281,8 @@ class Game {
         if (this.fish.x === this.fish.maxX) {
             const boa = new Boat(
               this.ctx,
-              Math.floor(Math.random() * (this.canvas.width * 2 - this.canvas.width + 78) + this.canvas.width + 78),
-              -15
+              this.canvas.width * 2,
+              20
             )
             this.boat.push(boa)
         }
@@ -329,7 +329,6 @@ class Game {
         this.protection = false
         this.buttonRestart.style.visibility = "visible"
         father.style.cursor = "auto"
-        
         // clearInterval(this.drawInterval)
         // 
         // this.ctx.save()
@@ -354,9 +353,8 @@ class Game {
     }
 
     checkCollitions() {
-        
         // Prey collitions
-        if (this.prey.some((prey) => this.fish.collidesWith(prey) && prey.x + prey.width*2 > this.ctx.canvas.width/2)) { 
+        if (this.prey.some((prey) => this.fish.collidesWith(prey) && prey.x + prey.width*4 > this.ctx.canvas.width/2)) { 
             console.log(this.collitionsCountPrey)
             if (this.collitionsCountPrey === 0 || this.collitionsCountPrey === 1 || this.collitionsCountPrey === 2 || this.collitionsCountPrey === 3 || this.collitionsCountPrey === 4) {
                 this.collitionsCountPrey = this.collitionsCountPrey + 1
@@ -387,7 +385,7 @@ class Game {
         }
         
         // slim
-        if (this.slim.some((sli) => this.fish.collidesWith(sli) /*&& sli.x + sli.width*2 > this.ctx.canvas.width/2*/)) {
+        if (this.slim.some((sli) => this.fish.collidesWith(sli) && sli.x + sli.width*4 > this.ctx.canvas.width/2)) {
             if (this.collitionsCountPrey >=1) {
                 console.log('getting slimmer')
                 this.fish.slimmer()
@@ -430,7 +428,7 @@ class Game {
                 this.boat.vx = NEG_SPEED_fixed
                 this.toxics.vx = NEG_SPEED_fixed
                 this.ink = false
-            }, 5000)
+            }, 3000)
         }
 
         // Toxic death collition
@@ -439,6 +437,10 @@ class Game {
             this.fish.toxicDead()
             this.green = true
             this.sound.toxicDead.play()
+            this.green = false
+            this.ink = false
+            this.crown = false
+            this.protection = false
 
             // METER ESTO SIEMPRE QUE SE MUERA DEL TODO
             this.fish.stopMotion = false
@@ -457,7 +459,7 @@ class Game {
             this.sound.dizzyWeed.play()
             setTimeout(()=> {
                 this.crown = false
-            }, 4000)
+            }, 3000)
         }
         this.seaweeds = this.seaweeds.filter((weed) => !this.fish.collidesWith(weed))
 
@@ -471,31 +473,12 @@ class Game {
             this.protection = false
             this.fish.stopMotion = false
             this.sound.toxicDead.play()
+            this.sound.boatComming.play()
             this.fish.collitions = false
             this.startPoints = false
             setTimeout(()=> {
                 this.die()
             }, 4000)
         }
-    }
-
-    checkObstaclesCollisions() {
-        // // prey with slim
-        // this.slim.forEach((sli) => {
-            
-        // })
-        //     if (this.prey.some((pre) => sli.collidesWith(pre))) {
-        //         this.prey = this.prey.filter((prey) => !this.prey.collidesWith(prey))
-        //         console.log('collision before screen')
-        //     }
-
-        // //slim with prey
-        // this.prey.forEach((pre) => {
-        //     if (this.prey.some((pre) => sli.collidesWith(pre))) {
-        //         this.prey = this.prey.filter((prey) => !this.prey.collidesWith(prey))
-        //         console.log('collision before screen')
-        //     }
-        // })
-        
     }
 }
