@@ -15,6 +15,7 @@ class Fish {
         this.sprite.drawCount = 0
 
         this.increase = 1.34
+        this.stopMotion = true
 
         // Total frames
         this.sprite.horizontalFrames = 3
@@ -269,10 +270,10 @@ class Fish {
         this.vy = 0
         this.y = this.y
         this.actionControl = false
-        this.collitions = false
         // this.rectX = this.maxX - 1 + this.width * 0.25
 
         setTimeout(()=> {
+            this.collitions = false
             this.sprite.horizontalFrameIndex = 2
             this.sprite.verticalFrameIndex = 0
         }, 200)
@@ -335,11 +336,11 @@ class Fish {
         this.x = this.maxX - 1
         this.vy = 0
         this.y = this.y
-        this.collitions = false
         this.actionControl = false
         // this.rectX = this.maxX - 1 + this.width * 0.25
 
         setTimeout(()=> {
+            this.collitions = false
             this.sprite.horizontalFrameIndex = 2
             this.sprite.verticalFrameIndex = 0
         }, 200)
@@ -398,34 +399,73 @@ class Fish {
     }
 
     fatDead() {
+        this.stopMotion = false
+        this.sprite.horizontalFrameIndex = 2
+        this.sprite.verticalFrameIndex = 0
+        this.collitions = false
+        this.actionControl = false
+        this.vy = 0
+        this.y = this.y
+        this.x = this.ctx.canvas.width / 2 - this.width - 1
+        this.rectX = this.x + this.width * 0.25
         setTimeout(()=> {
-            this.collitions = false
-            this.actionControl = false
-            this.vy = 0
-            this.y = this.y
-            
-            this.x = this.ctx.canvas.width / 2 - this.width - 1
-            this.rectX = this.x + this.width * 0.25
             this.sprite.horizontalFrameIndex = 0
             this.sprite.verticalFrameIndex = 1
+        }, 1000)
 
-            setTimeout(()=> {
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 1
-            }, 700)
+        setTimeout(()=> {
+            this.width -= this.width/8
+            this.height -= this.height/8
+        }, 200)
 
-            setTimeout(()=> {
-                this.vy += 2
-                this.maxYfloor = this.ctx.canvas.height + this.rectHeight * 3
-            }, 1500)
-        }, 1600)
+        setTimeout(()=> {
+            this.width += this.width/8
+            this.height += this.height/8
+        }, 300)
+
+        setTimeout(()=> {
+            this.width -= this.width/8
+            this.height -= this.height/8
+        }, 400)
+        setTimeout(()=> {
+            this.width += this.width/8
+            this.height += this.height/8
+        }, 500)
+        setTimeout(()=> {
+            this.width -= this.width/8
+            this.height -= this.height/8
+        }, 600)
+        setTimeout(()=> {
+            this.width += this.width/8
+            this.height += this.height/8
+        }, 700)
+
+        setTimeout(()=> {
+            this.width -= this.width/8
+            this.height -= this.height/8
+        }, 800)
+        setTimeout(()=> {
+            this.width += this.width/8
+            this.height += this.height/8
+        }, 900)
+        setTimeout(()=> {
+            this.width -= this.width/8
+            this.height -= this.height/8
+        }, 1000)
+
+        setTimeout(()=> {
+            this.vy += 2
+            this.maxYfloor = this.ctx.canvas.height + this.rectHeight * 3
+        }, 2000)
     }
 
     protected() {
-        this.collitions = false
+        setTimeout(()=> {
+            this.collitions = false
+        }, 100)
         setTimeout(()=> {
             this.collitions = true
-        }, 5000)
+        }, 4500)
     }
 
     slowOctopus() {
@@ -451,24 +491,44 @@ class Fish {
     }
 
     toxicDead() {
+        this.stopMotion = false
         this.collitions = false
         this.actionControl = false
         this.vy = 0
         this.y = this.y
+        this.sprite.horizontalFrameIndex = 1
+        this.sprite.verticalFrameIndex = 1
         
         this.x = this.ctx.canvas.width / 2 - this.width - 1
         this.rectX = this.x + this.width * 0.25
-        this.sprite.horizontalFrameIndex = 0
-        this.sprite.verticalFrameIndex = 1
 
         setTimeout(()=> {
             this.sprite.horizontalFrameIndex = 1
             this.sprite.verticalFrameIndex = 1
-        }, 700)
-
-        setTimeout(()=> {
             this.vy += 1
             this.maxYfloor = this.ctx.canvas.height + this.rectHeight * 3
+        }, 1500) 
+
+    }
+
+    rodDead() {
+        this.stopMotion = false
+        this.collitions = false
+        this.actionControl = false
+        this.vy = 0
+        this.y = this.y
+        this.sprite.horizontalFrameIndex = 1
+        this.sprite.verticalFrameIndex = 1
+
+        
+        this.x = this.ctx.canvas.width / 2 - this.width - 1
+        this.rectX = this.x + this.width * 0.25
+
+        setTimeout(()=> {
+            this.sprite.horizontalFrameIndex = 1
+            this.sprite.verticalFrameIndex = 1
+            this.vy += - 2
+            this.maxYfloor = 60
         }, 1500) 
 
     }
@@ -477,7 +537,7 @@ class Fish {
         if (this.sprite.drawCount % MOVEMENT_FRAMES === 0) {
             if (this.sprite.horizontalFrameIndex === 1) {
                 this.sprite.horizontalFrameIndex = 0
-            } else {
+            } else if (this.stopMotion) {
                 this.sprite.horizontalFrameIndex++
             }
         }

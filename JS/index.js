@@ -35,7 +35,9 @@ function converterRounds() {
 
 let playAgainBut = document.getElementById("buttonRestart")
 let unShow = (element) => element.style.visibility = "hidden"
-let hide = (element) => element.style.display = "none"
+let hide = (element) => element.style.cursor = "none"
+const father = document.getElementById("game")
+const son = document.getElementById("game-canvas")
 
 
 
@@ -48,9 +50,11 @@ window.addEventListener('load', () => {
     addBtn.addEventListener('click', removeItem)
     addBtn.onclick = () => {
         game.presStart()
+        father.style.cursor = "none"
     }
 
     playAgainBut.addEventListener('click', ()=> {
+        father.style.cursor = "none"
         roundsCounter = roundsCounter + 1
         unShow(playAgainBut)
         accScore()

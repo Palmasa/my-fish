@@ -40,7 +40,7 @@ let dieciseis = 960
 // let weed = [siete, seis, ocho]
 // let boat = [quince, once, siete, doce]
 
-let prey = [uno, dos, cinco]
+let prey = [uno]
 let slim = [tres, cuatro, siete]
 let buble = [ocho, catorce]
 let octopus = [dos]

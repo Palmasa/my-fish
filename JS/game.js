@@ -4,15 +4,16 @@ class Game {
         this.ctx = this.canvas.getContext('2d')
 
         this.buttonRestart = document.getElementById("buttonRestart")
+        this.father = document.getElementById("game")
 
         this.canvas.width = 800
         this.canvas.height = 500
 
+        this.beging = false
+
         this.drawInterval = undefined
         this.begInterval = undefined
         this.fps = 1000 / 60
-
-        this.beging = false
 
         this.drawCount = 0
         this.drawCountPrey = 0
@@ -28,6 +29,7 @@ class Game {
         this.ink = false
         this.green = false
         this.crown = false
+        
 
         this.background = new Background(this.ctx)
         this.prey = []
@@ -38,13 +40,13 @@ class Game {
         this.octopus = []
         this.toxics = []
         this.fish = new Fish(this.ctx, 10, this.canvas.height / 2 - 50)
+        this.efect = new Efect(this.ctx, this.fish.x + this.fish.width/2, this.fish.y + this.fish.height/2)
 
         this.points = 0
-        this.fats = new Image ()
-        this.fats.src = '../assets/fats.png'
+        this.startPoints = false
 
         const theme = new Audio('../assets/music-background.mp3')
-        theme.volume = 0.3
+        theme.volume = 0.2
         this.backSound = {
             theme: theme
         }
@@ -53,6 +55,7 @@ class Game {
             eat: new Audio('../assets/music-blop.mp3'),
             glu: new Audio('../assets/music-rod.mp3'),
             protectionBuble: new Audio('../assets/bumble.mp3'),
+            offProtection: new Audio('../assets/Bubbles-4s.mp3'),
             octopusSplash: new Audio('../assets/splash.mp3'),
             dizzyWeed: new Audio('../assets/mareo.mp3'),
             toxicDead: new Audio('../assets/death.mp3'),
@@ -68,12 +71,15 @@ class Game {
         this.fish.actionControl = true
         this.fish.vx = SPEED
         this.backSound.theme.play() //=> MUSIC HERE!
+        this.startPoints = true
     }
 
     reSet() {
         this.clear()
         this.draw()
+        this.collitionsCountPrey = 0
         this.points = 0
+        this.startPoints = false
         this.prey = []
         this.slim = []
         this.bubles = []
@@ -85,10 +91,6 @@ class Game {
         this.fish = new Fish(this.ctx, 10, this.canvas.height / 2 - 50)
     }
 
-    rePaint() {
-        
-    }
-
     start() {
         if (!this.drawInterval) {
             this.drawInterval = setInterval(() => {
@@ -96,7 +98,6 @@ class Game {
                 this.move()
                 this.draw()
                 this.checkCollitions()
-                this.checkObstaclesCollisions()
                 
                 this.drawCountPrey ++
                 this.drawCountSlim ++
@@ -111,15 +112,15 @@ class Game {
                     this.drawCountPrey = 0
                 }
                 if (this.drawCountSlim % DRAW_SLIM_FRAMES === 0) {
-                    this.addSlim()
+                    //this.addSlim()
                     this.drawCountSlim = 0
                 }
                 if (this.drawCountBuble % DRAW_BUBLE_FRAMES === 0) {
-                    this.addBuble()
+                    //this.addBuble()
                     this.drawCountBuble = 0
                 }
                 if (this.drawCountOctopus % DRAW_OCTOPUS_FRAMES === 0) {
-                    this.addOctopus()
+                    //this.addOctopus()
                     this.drawCountOctopus = 0
                 }
                 if (this.drawCountToxic % DRAW_TOXIC_FRAMES === 0) {
@@ -152,36 +153,21 @@ class Game {
 
     draw() {
         this.background.draw()
-        this.fish.draw()
 
-        this.prey.forEach((pre)=>{
+        // Obstacles
+        this.prey.forEach((pre) => {
             pre.draw()
         })
-        this.slim.forEach((sli)=>{
+        this.slim.forEach((sli) => {
             sli.draw()
         })
         this.bubles.forEach((buble) => {
             buble.draw()
         })
-
-        if (this.protection) {
-            this.fish.drawBuble()
-        }
-
-        if (this.ink) {
-            this.fish.drawInk()
-        }
-
-        if (this.green) {
-            this.fish.drawGreen()
-        }
-
-        if (this.crown) {
-            this.fish.drawCrown()
-        }
         this.seaweeds.forEach((seaweed) => {
             seaweed.draw()
         })
+
         this.boat.forEach((boa) => {
             boa.draw()
         })
@@ -192,24 +178,32 @@ class Game {
             tox.draw()
         })
 
+        this.fish.draw()
+
+        // Accesories
+        if (this.protection) {
+            this.fish.drawBuble()
+        }
+        if (this.ink) {
+            this.fish.drawInk()
+        }
+        if (this.green) {
+            this.fish.drawGreen()
+        }
+        if (this.crown) {
+            this.fish.drawCrown()
+        }
+
+        if (this.startPoints) {
+            this.points +=1
+        }
         // Points
         this.ctx.save()
-        this.ctx.font = 'bold 10px Arial'
-        this.ctx.fillText(`SCORE`, 10, 15)
+        // this.ctx.font = 'bold 10px Arial'
+        // this.ctx.fillText(`SCORE`, 10, 15)
         this.ctx.font = 'bold 18px Arial'
-        this.ctx.fillText(`${this.points}`, 50, 15)
+        this.ctx.fillText(`${this.points}`, 0, 15)
         this.ctx.restore()
-
-        // Fats
-        // this.ctx.save()
-        // this.ctx.drawImage(
-        //     this.fats,
-        //     this.canvas.width - 1000 / 5.2 + 1,
-        //     -2,
-        //     1000/ 5.2,
-        //     166 / 5.2
-        // )
-        // this.ctx.restore()
     }
 
     getScore() {
@@ -221,7 +215,6 @@ class Game {
         this.fish.move()
 
         if (this.fish.x === this.fish.maxX) {
-            this.points += 1
             this.background.move()
             this.prey.forEach((pre) => {
                 pre.move()
@@ -237,7 +230,6 @@ class Game {
             })
             this.boat.forEach((boa) => {
                 boa.move()
-                //boa.seaMove()
             })
             this.octopus.forEach((oct) => {
                 oct.move()
@@ -246,7 +238,6 @@ class Game {
                 tox.move()
             })
         }
-        
     }
 
     onKeyEvent(event) {
@@ -257,7 +248,7 @@ class Game {
         if (this.fish.x === this.fish.maxX) {
           const seaweed = new Seaweed(
             this.ctx,
-            Math.floor(Math.random() * (this.canvas.width*2 - this.canvas.width + 78) + this.canvas.width + 78),
+            Math.floor(Math.random() * (this.canvas.width * 2 - this.canvas.width + 78) + this.canvas.width + 78),
             Math.floor(Math.random() * (350 - 80) + 80)
           )
           this.seaweeds.push(seaweed)
@@ -266,23 +257,23 @@ class Game {
 
     addPrey() {
         if (this.fish.x === this.fish.maxX) {
-            const pre = new Prey(
+            const predator = new Prey(
               this.ctx,
-              Math.floor(Math.random() * (this.canvas.width*2 - this.canvas.width + 78) + this.canvas.width + 78),
+              Math.floor(Math.random() * (this.canvas.width * 2 - this.canvas.width + 78) + this.canvas.width + 78),
               Math.floor(Math.random() * (350 - 80) + 80)
             )
-            this.prey.push(pre)
+            this.prey.push(predator)
         }
     }
 
     addSlim() {
         if (this.fish.x === this.fish.maxX) {
-            const sli = new Slim(
+            const slimme = new Slim(
               this.ctx,
-              Math.floor(Math.random() * (this.canvas.width*2 - this.canvas.width + 78) + this.canvas.width + 78),
+              Math.floor(Math.random() * (this.canvas.width * 2 - this.canvas.width + 78) + this.canvas.width + 78),
               Math.floor(Math.random() * (350 - 80) + 80)
             )
-            this.slim.push(sli)
+            this.slim.push(slimme)
         }
     }
 
@@ -301,7 +292,7 @@ class Game {
         if (this.fish.x === this.fish.maxX) {
             const oct = new Octopus(
               this.ctx,
-              Math.floor(Math.random() * (this.canvas.width*2 - this.canvas.width + 78) + this.canvas.width + 78),
+              Math.floor(Math.random() * (this.canvas.width * 2 - this.canvas.width + 78) + this.canvas.width + 78),
               Math.floor(Math.random() * (350 - 80) + 80)
             )
             this.octopus.push(oct)
@@ -331,16 +322,20 @@ class Game {
     }
 
     die() {
+        this.fish.stopMotion = false
         this.green = false
         this.ink = false
         this.crown = false
+        this.protection = false
         this.buttonRestart.style.visibility = "visible"
+        father.style.cursor = "auto"
+        
         // clearInterval(this.drawInterval)
         // 
         // this.ctx.save()
         // this.ctx.fillStyle = 'rgba(194, 244, 255, 0.1)'
         // this.ctx.fillRect(this.canvas.width/2 - 150, this.canvas.height/2 - 120, 300, 250)
-    
+
         // this.ctx.font = '20px Russo One'
         // this.ctx.fillStyle = 'Black'
         // this.ctx.textAlign = 'center'
@@ -359,37 +354,49 @@ class Game {
     }
 
     checkCollitions() {
+        
         // Prey collitions
-        if (this.prey.some((prey) => this.fish.collidesWith(prey) /*&& prey.x + prey.width*2 > this.ctx.canvas.width/2*/)) { 
-            this.collitionsCountPrey = this.collitionsCountPrey + 1
+        if (this.prey.some((prey) => this.fish.collidesWith(prey) && prey.x + prey.width*2 > this.ctx.canvas.width/2)) { 
             console.log(this.collitionsCountPrey)
-
-            this.fish.fat()
-
-            this.sound.eat.play()
-            setTimeout(() => {
+            if (this.collitionsCountPrey === 0 || this.collitionsCountPrey === 1 || this.collitionsCountPrey === 2 || this.collitionsCountPrey === 3 || this.collitionsCountPrey === 4) {
+                this.collitionsCountPrey = this.collitionsCountPrey + 1
+                this.fish.fat()
+                this.sound.eat.play()
+                setTimeout(() => {
                 this.sound.eat.play()
             }, 400)
-            
+            } else if (this.collitionsCountPrey === 5) {
+                this.fish.fatDead()
+                this.fish.stopMotion = false
+                this.fish.collitions = false
+                this.green = false
+                this.ink = false
+                this.crown = false
+                this.protection = false
+                this.startPoints = false
+                this.sound.eat.play()
+                setTimeout(() => {
+                    this.sound.eat.play()
+                    this.prey = []
+                }, 1000)
+                setTimeout(()=> { 
+                    this.die()
+                }, 5000)
+            }
+            this.prey = this.prey.filter((prey) => !this.fish.collidesWith(prey))
         }
-        this.prey = this.prey.filter((prey) => !this.fish.collidesWith(prey))
-        if (this.collitionsCountPrey >= 5) {
-            this.ink = false
-            this.crown = false
-            this.fish.fatDead()
-        }
-
+        
         // slim
         if (this.slim.some((sli) => this.fish.collidesWith(sli) /*&& sli.x + sli.width*2 > this.ctx.canvas.width/2*/)) {
             if (this.collitionsCountPrey >=1) {
-                this.collitionsCountPrey = 0
                 console.log('getting slimmer')
                 this.fish.slimmer()
                 this.sound.eat.play()
                 setTimeout(() => {
                 this.sound.eat.play()
+                this.collitionsCountPrey = 0
                 }, 400)
-                this.slim = this.slim.filter((sli) => !this.fish.collidesWith(sli))
+                this.slim = this.slim.filter((sl) => !this.fish.collidesWith(sl))
             }
             if (this.collitionsCountPrey === 0) {
                 this.sound.glu.play()
@@ -404,11 +411,13 @@ class Game {
             this.ink = false
             this.crown = false
             this.sound.protectionBuble.play()
+            this.sound.offProtection.play()
             setTimeout(()=> {
                 this.protection = false
-            }, 5000)
+            }, 4500)
         }
-        this.bubles = this.bubles.filter((buble) => !this.fish.collidesWith(buble))
+        this.bubles = this.bubles.filter((bu) => !this.fish.collidesWith(bu))
+        
 
          // Octopus ink collitions
          if (this.octopus.some((octopu) => this.fish.collidesWith(octopu))) {
@@ -430,8 +439,12 @@ class Game {
             this.fish.toxicDead()
             this.green = true
             this.sound.toxicDead.play()
-            
-            setTimeout(()=> { // METER ESTO SIEMPRE QUE SE MUERA DEL TODO
+
+            // METER ESTO SIEMPRE QUE SE MUERA DEL TODO
+            this.fish.stopMotion = false
+            this.fish.collitions = false
+            this.startPoints = false
+            setTimeout(()=> {
                 this.die()
             }, 5000)
         }
@@ -448,11 +461,21 @@ class Game {
         }
         this.seaweeds = this.seaweeds.filter((weed) => !this.fish.collidesWith(weed))
 
-        // Boat
+        // Boat dead
         if (this.boat.some((boa) => this.fish.collidesWith(boa))) {
-            console.log('boatHIT')
-            this.fish.toxicDead()
-            this.green = true
+            console.log('rodHIT')
+            this.fish.rodDead()
+            this.green = false
+            this.ink = false
+            this.crown = false
+            this.protection = false
+            this.sound.toxicDead.play()
+            this.fish.stopMotion = false
+            this.fish.collitions = false
+            this.startPoints = false
+            setTimeout(()=> {
+                this.die()
+            }, 5000)
         }
     }
 
