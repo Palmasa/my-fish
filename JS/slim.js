@@ -9,7 +9,7 @@ class Slim {
         this.vy = - 0.5
 
         this.slim = new Image ()
-        this.slim.src = '../assets/prey.png'
+        this.slim.src = './assets/prey.png'
         this.slim.isReady = false
 
         // Total frames

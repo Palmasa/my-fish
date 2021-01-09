@@ -9,7 +9,7 @@ class Seaweed {
         this.vy = - 0.5
 
         this.weed = new Image ()
-        this.weed.src = '../assets/seaWeed-1.png'
+        this.weed.src = './assets/seaWeed-1.png'
         this.weed.isReady = false
 
         // Total frames

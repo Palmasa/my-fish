@@ -13,7 +13,7 @@ class Buble {
 
 
         this.buble = new Image ()
-        this.buble.src = '../assets/protection-buble.png'
+        this.buble.src = './assets/protection-buble.png'
         this.buble.isReady = false
         this.buble.onload = () => this.buble.isReady = true
     }

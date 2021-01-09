@@ -10,7 +10,7 @@ class Octopus {
         this.ay = 0.1
 
         this.octopus = new Image ()
-        this.octopus.src = '../assets/octopus.png'
+        this.octopus.src = './assets/octopus.png'
         this.octopus.isReady = false
 
          // Total frames

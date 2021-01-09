@@ -53,4 +53,3 @@ const DRAW_OCTOPUS_FRAMES = getRandomElement(octopus)
 const DRAW_TOXIC_FRAMES = getRandomElement(toxic)
 const DRAW_WEED_FRAMES = getRandomElement(weed)
 const DRAW_BOAT_FRAMES = getRandomElement(boat)
-

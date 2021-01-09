@@ -13,7 +13,7 @@ class Toxic {
 
 
         this.toxic = new Image ()
-        this.toxic.src = '../assets/radioactive.png'
+        this.toxic.src = './assets/radioactive.png'
         this.toxic.isReady = false
         this.toxic.onload = () => this.toxic.isReady = true
     }

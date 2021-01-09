@@ -9,7 +9,7 @@ class Prey {
         this.vy = - 0.5
 
         this.prey = new Image ()
-        this.prey.src = '../assets/prey.png'
+        this.prey.src = './assets/prey.png'
         this.prey.isReady = false
 
         // Total frames

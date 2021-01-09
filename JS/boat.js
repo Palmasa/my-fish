@@ -12,12 +12,12 @@ class Boat {
         this.height = 709 / 3
 
         this.boat = new Image ()
-        this.boat.src = '../assets/maRod.png'
+        this.boat.src = './assets/maRod.png'
         this.boat.isReady = false
         this.boat.onload = () => this.boat.isReady = true
 
         this.rod = new Image()
-        this.rod.src = '../assets/maBoat.png'
+        this.rod.src = './assets/maBoat.png'
         this.boat.isReady = false
         this.rod.onload = () => this.rod.isReady = true
     }

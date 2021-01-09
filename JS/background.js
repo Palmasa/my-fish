@@ -9,7 +9,7 @@ class Background {
         this.vx = NEG_SPEED_fixed
 
         this.imgSea = new Image()
-        this.imgSea.src = '../assets/bg-fx-6.png'
+        this.imgSea.src = './assets/bg-fx-6.png'
         this.imgSea.isReady = false
         this.imgSea.onload = () => this.imgSea.isReady = true
 
@@ -21,7 +21,7 @@ class Background {
         this.vy = 0.1
 
         this.imgFloor = new Image()
-        this.imgFloor.src = '../assets/floor.png'
+        this.imgFloor.src = './assets/floor.png'
         this.imgFloor.isReady = false
         this.imgFloor.onload = () => this.imgFloor.isReady = true
     

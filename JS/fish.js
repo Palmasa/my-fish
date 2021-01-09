@@ -9,7 +9,7 @@ class Fish {
         this.vy = 0
 
         this.sprite = new Image ()
-        this.sprite.src = '../assets/spritesFish-9.png'
+        this.sprite.src = './assets/spritesFish-9.png'
         this.sprite.isReady = false
 
         this.sprite.drawCount = 0
@@ -62,23 +62,23 @@ class Fish {
 
         // Complements obstacles
         this.bubble = new Image ()
-        this.bubble.src = '../assets/protection-buble.png'
+        this.bubble.src = './assets/protection-buble.png'
         this.bubble.isReady = false
         this.bubble.onload = () => this.bubble.isReadyBubble = true
 
         this.ink = new Image ()
-        this.ink.src = '../assets/03TINTA.png'
+        this.ink.src = './assets/03TINTA.png'
         this.ink.isReady = false
         this.ink.onload = () => this.bubble.isReadyBubble = true
 
         this.green1 = new Image ()
-        this.green1.src = '../assets/01puffverde.png'
+        this.green1.src = './assets/01puffverde.png'
         this.green1.isReady = false
         this.green1.onload = () => this.bubble.isReadyBubble = true
 
         // Crown
         this.crown = new Image ()
-        this.crown.src = '../assets/dizzy-crown.png'
+        this.crown.src = './assets/dizzy-crown.png'
         this.crown.drawCount = 0
         // Total frames crown
         this.crown.horizontalFrames = 2

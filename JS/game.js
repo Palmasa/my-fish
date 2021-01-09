@@ -45,21 +45,21 @@ class Game {
         this.points = 0
         this.startPoints = false
 
-        const theme = new Audio('../assets/music-background.mp3')
+        const theme = new Audio('./assets/music-background.mp3')
         theme.volume = 0.2
         this.backSound = {
             theme: theme
         }
 
         this.sound = {
-            eat: new Audio('../assets/music-blop.mp3'),
-            glu: new Audio('../assets/music-rod.mp3'),
-            protectionBuble: new Audio('../assets/bumble.mp3'),
-            offProtection: new Audio('../assets/Bubbles-4s.mp3'),
-            octopusSplash: new Audio('../assets/splash.mp3'),
-            dizzyWeed: new Audio('../assets/mareo.mp3'),
-            toxicDead: new Audio('../assets/death.mp3'),
-            boatComming: new Audio('../assets/Music-boat.mp3')
+            eat: new Audio('./assets/music-blop.mp3'),
+            glu: new Audio('./assets/music-rod.mp3'),
+            protectionBuble: new Audio('./assets/bumble.mp3'),
+            offProtection: new Audio('./assets/Bubbles-4s.mp3'),
+            octopusSplash: new Audio('./assets/splash.mp3'),
+            dizzyWeed: new Audio('./assets/mareo.mp3'),
+            toxicDead: new Audio('./assets/death.mp3'),
+            boatComming: new Audio('./assets/Music-boat.mp3')
         }
     }
 
