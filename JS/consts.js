@@ -4,9 +4,9 @@ const KEY_DOWN = 40
 
 const MOVEMENT_FRAMES = 10
 
-const SPEED = 7
-const NEG_SPEED_swimmers = -9
-const NEG_SPEED_fixed = -7
+const SPEED = 10
+const NEG_SPEED_swimmers = -12
+const NEG_SPEED_fixed = -10
 
 function getRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)]

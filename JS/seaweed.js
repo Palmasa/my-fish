@@ -5,7 +5,7 @@ class Seaweed {
         this.x = x
         this.y = y
 
-        this.vx = NEG_SPEED_fixed + 1
+        this.vx = NEG_SPEED_fixed + 0.5
         this.vy = - 0.5
 
         this.weed = new Image ()
