@@ -40,7 +40,6 @@ class Game {
         this.octopus = []
         this.toxics = []
         this.fish = new Fish(this.ctx, 10, this.canvas.height / 2 - 50)
-        this.efect = new Efect(this.ctx, this.fish.x + this.fish.width/2, this.fish.y + this.fish.height/2)
 
         this.points = 0
         this.startPoints = false
