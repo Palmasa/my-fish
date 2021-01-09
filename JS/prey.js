@@ -86,12 +86,5 @@ class Prey {
         this.prey.horizontalFrameIndex = 9
         this.prey.verticalFrameIndex = 1
     }
-
-    /* collidesWith(element) {
-        return this.collitions && this.rectX < element.x + element.width*2 &&
-        this.rectX + this.rectWidth*2 > element.x &&
-        this.rectY < element.y + element.height*2 &&
-        this.rectY + this.rectHeight*2 > element.y
-    } */
 }
 

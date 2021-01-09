@@ -13,6 +13,7 @@ function accScore() {
     scores.appendChild(newScore)
 }
 
+
 function converterRounds() {
     if (roundsCounter === 1) {
         return "First"

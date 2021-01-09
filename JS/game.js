@@ -384,7 +384,7 @@ class Game {
             this.prey = this.prey.filter((prey) => !this.fish.collidesWith(prey))
         }
         
-        // slim
+        // Slim Collition
         if (this.slim.some((sli) => this.fish.collidesWith(sli) && sli.x + sli.width*4 > this.ctx.canvas.width/2)) {
             if (this.collitionsCountPrey >=1) {
                 console.log('getting slimmer')
@@ -437,12 +437,9 @@ class Game {
             this.fish.toxicDead()
             this.green = true
             this.sound.toxicDead.play()
-            this.green = false
             this.ink = false
             this.crown = false
             this.protection = false
-
-            // METER ESTO SIEMPRE QUE SE MUERA DEL TODO
             this.fish.stopMotion = false
             this.fish.collitions = false
             this.startPoints = false
@@ -463,7 +460,7 @@ class Game {
         }
         this.seaweeds = this.seaweeds.filter((weed) => !this.fish.collidesWith(weed))
 
-        // Boat dead
+        // Boat dead collition
         if (this.boat.some((boa) => this.fish.collidesWith(boa))) {
             console.log('rodHIT')
             this.fish.rodDead()

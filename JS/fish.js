@@ -71,10 +71,10 @@ class Fish {
         this.ink.isReady = false
         this.ink.onload = () => this.bubble.isReadyBubble = true
 
-        this.green = new Image ()
-        this.green.src = '../assets/01puffverde.png'
-        this.green.isReady = false
-        this.green.onload = () => this.bubble.isReadyBubble = true
+        this.green1 = new Image ()
+        this.green1.src = '../assets/01puffverde.png'
+        this.green1.isReady = false
+        this.green1.onload = () => this.bubble.isReadyBubble = true
 
         // Crown
         this.crown = new Image ()
@@ -165,7 +165,7 @@ class Fish {
         this.ctx.save()
         this.ctx.globalAlpha = 0.5
         this.ctx.drawImage(
-            this.green,
+            this.green1,
             this.x - 60,
             this.y - 60,
             this.width + 120,
@@ -491,7 +491,6 @@ class Fish {
     }
 
     toxicDead() {
-        this.green = true
         this.stopMotion = false
         this.collitions = false
         this.actionControl = false
